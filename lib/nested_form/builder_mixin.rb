@@ -12,6 +12,7 @@ module NestedForm
     #
     # See the README for more details on where to call this method.
     def link_to_add(*args, &block)
+      model_object = args.shift
       options = args.extract_options!.symbolize_keys
       association = args.pop
       options[:class] = [options[:class], "add_nested_fields"].compact.join(" ")
@@ -20,7 +21,7 @@ module NestedForm
       args << options
       @fields ||= {}
       @template.after_nested_form(association) do
-        model_object = object.class.reflect_on_association(association).klass.new
+        #model_object = object.class.reflect_on_association(association).klass.new
         output = %Q[<div id="#{association}_fields_blueprint" style="display: none">].html_safe
         output << fields_for(association, model_object, :child_index => "new_#{association}", &@fields[association])
         output.safe_concat('</div>')
