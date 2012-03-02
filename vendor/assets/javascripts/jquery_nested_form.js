@@ -10,6 +10,10 @@ jQuery(function($) {
       var link    = e.currentTarget;
       var assoc   = $(link).attr('data-association');            // Name of child
       var content = $('#' + assoc + '_fields_blueprint').html(); // Fields template
+      
+      var limit   = $(link).attr('limit'); 
+      var counter = $('form a.remove_nested_fields:visible').length + 1;
+      if (counter >= limit) $(link).hide();
 
       // Make the context correct by replacing new_<parents> with the generated ID
       // of each of the parent objects
@@ -51,6 +55,11 @@ jQuery(function($) {
       return $(content).insertBefore(link);
     },
     removeFields: function(e) {
+      
+      var limit   = $(link).attr('limit');
+		  var counter = $('form a.remove_nested_fields:visible').length - 1;
+		  if (counter < limit) $('form a.add_nested_fields').show();
+    
       var link = e.currentTarget;
       var hiddenField = $(link).prev('input[type=hidden]');
       hiddenField.val('1');
