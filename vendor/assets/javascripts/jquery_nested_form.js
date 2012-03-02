@@ -55,12 +55,12 @@ jQuery(function($) {
       return $(content).insertBefore(link);
     },
     removeFields: function(e) {
+      var link = e.currentTarget;
       
       var limit   = $(link).attr('limit');
-		  var counter = $('form a.remove_nested_fields:visible').length - 1;
-		  if (counter < limit) $('form a.add_nested_fields').show();
-    
-      var link = e.currentTarget;
+      var counter = $('form a.remove_nested_fields:visible').length - 1;
+      if (counter < limit) $('form a.add_nested_fields').show();
+      
       var hiddenField = $(link).prev('input[type=hidden]');
       hiddenField.val('1');
       // if (hiddenField) {
