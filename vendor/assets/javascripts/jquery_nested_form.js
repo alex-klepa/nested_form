@@ -14,6 +14,8 @@ jQuery(function($) {
       var limit   = $(link).attr('limit'); 
       var counter = $('form a.remove_nested_fields:visible').length + 1;
       if (counter >= limit) $(link).hide();
+      if (counter == 1) $('form a.remove_nested_fields:visible').hide();
+      if (counter > 1) $('form a.remove_nested_fields:visible').show();
 
       // Make the context correct by replacing new_<parents> with the generated ID
       // of each of the parent objects
@@ -60,6 +62,8 @@ jQuery(function($) {
       var limit   = $(link).attr('limit');
       var counter = $('form a.remove_nested_fields:visible').length - 1;
       if (counter < limit) $('form a.add_nested_fields').show();
+      if (counter == 1) $('form a.remove_nested_fields:visible').hide();
+      if (counter > 1) $('form a.remove_nested_fields:visible').show();
       
       var hiddenField = $(link).prev('input[type=hidden]');
       hiddenField.val('1');
